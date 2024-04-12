@@ -23,6 +23,7 @@ jobs:
         environment-name: mamba_pytest_${{ github.sha }}
         create-args: python=3.11
         post-cleanup: 'all'
+        init-shell: bash
 #    - name: Lint with flake8
 #      run: |
 #        mamba install flake8
@@ -30,10 +31,9 @@ jobs:
 #        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Activate Mamba Environment
-      run: mamba activate mamba_pytest_${{ github.sha }}
     - name: Check In Mamba
       run: mamba env
+      shell: bash
     - name: Install Pytest
       run: pip install pytest
     - name: Run Pytest Tests
