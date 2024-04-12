@@ -19,8 +19,7 @@ jobs:
       with:
         micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
         micromamba-binary-path: /usr/local/bin/micromamba
-#        micromamba-binary-path: ${{ runner.temp }}/bin/micromamba
-        environment-name: mamba_pytest_${{ github.sha }}
+        environment-name: micromamba_pytest_${{ github.sha }}
         create-args: python=3.11
         post-cleanup: 'all'
 #    - name: Lint with flake8
@@ -31,7 +30,7 @@ jobs:
 #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Check In Mamba
-      run: micromamba env
+      run: micromamba list
     - name: Install Pytest
       run: pip install pytest
     - name: Run Pytest Tests
