@@ -18,7 +18,7 @@ jobs:
     - uses: mamba-org/setup-micromamba@v1
       with:
         micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
-        micromamba-binary-path: /usr/local/bin/micromamba
+#        micromamba-binary-path: /usr/local/bin/micromamba
         environment-name: micromamba_pytest_env
         create-args: python=3.11
         post-cleanup: 'all'
