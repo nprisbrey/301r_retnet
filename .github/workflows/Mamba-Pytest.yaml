@@ -36,6 +36,7 @@ jobs:
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Check In Mamba
       run: mamba env
+      shell: bash -le {0}
     - name: Install Pytest
       run: pip install pytest
     - name: Run Pytest Tests
