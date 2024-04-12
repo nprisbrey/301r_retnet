@@ -7,6 +7,9 @@ on:
   merge_group:
   workflow_dispatch:
   
+defaults:
+  run:
+    shell: bash -leo pipefail {0}
 
 jobs:
   build-linux:
@@ -33,7 +36,6 @@ jobs:
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Check In Mamba
       run: mamba env
-      shell: bash
     - name: Install Pytest
       run: pip install pytest
     - name: Run Pytest Tests
