@@ -29,23 +29,15 @@ jobs:
 #        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Hello
-      run: micromamba run -n micromamba_pytest_env echo "hello"
-    - name: Install Ninja
-      run: $MAMBA_EXE install ninja
-      shell: micromamba run -n micromamba_pytest_env {0}
     - name: Install CUDA
-      run: $MAMBA_EXE install cuda -c nvidia -y
-      shell: micromamba run -n micromamba_pytest_env {0}
+      run: micromamba run -n micromamba_pytest_env $MAMBA_EXE install cuda -c nvidia -y
+    - name: Install Ninja
+      run: micromamba run -n micromamba_pytest_env $MAMBA_EXE install ninja -y
     - name: Install Python Requirements
-      run: pip install -r requirements.txt
-      shell: micromamba run -n micromamba_pytest_env {0}
+      run: micromamba run -n micromamba_pytest_env pip install -r requirements.txt
     - name: Install Flash Attention
-      run: pip install flash-attn==2.5.6 --no-build-isolation
-      shell: micromamba run -n micromamba_pytest_env {0}
+      run: micromamba run -n micromamba_pytest_env pip install flash-attn==2.5.6 --no-build-isolation
     - name: Install Pytest
-      run: pip install pytest
-      shell: micromamba run -n micromamba_pytest_env {0}
+      run: micromamba run -n micromamba_pytest_env pip install pytest
     - name: Run Pytest Tests
-      run: pytest
-      shell: micromamba run -n micromamba_pytest_env {0}
+      run: micromamba run -n micromamba_pytest_env pytest
