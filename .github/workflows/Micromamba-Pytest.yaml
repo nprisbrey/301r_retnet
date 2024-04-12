@@ -30,8 +30,7 @@ jobs:
 #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Hello
-      run: echo "hello"
-      shell: micromamba run -n micromamba_pytest_env {0}
+      run: micromamba run -n micromamba_pytest_env echo "hello"
     - name: Install Ninja
       run: $MAMBA_EXE install ninja
       shell: micromamba run -n micromamba_pytest_env {0}
