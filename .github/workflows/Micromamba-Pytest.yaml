@@ -19,7 +19,7 @@ jobs:
       with:
         micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
         micromamba-binary-path: /usr/local/bin/micromamba
-        environment-name: micromamba_pytest_${{ github.sha }}
+        environment-name: micromamba_pytest_env
         create-args: python=3.11
         post-cleanup: 'all'
 #    - name: Lint with flake8
@@ -31,19 +31,19 @@ jobs:
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Install CUDA
       run: micromamba install cuda -c nvidia -y
-      shell: micromamba run -n micromamba_pytest_${{ github.sha }} --live-stream {0}
+      shell: micromamba run -n micromamba_pytest_env --live-stream {0}
     - name: Install Ninja
       run: micromamba install ninja
-      shell: micromamba run -n micromamba_pytest_${{ github.sha }} --live-stream {0}
+      shell: micromamba run -n micromamba_pytest_env --live-stream {0}
     - name: Install Python Requirements
       run: pip install -r requirements.txt
-      shell: micromamba run -n micromamba_pytest_${{ github.sha }} --live-stream {0}
+      shell: micromamba run -n micromamba_pytest_env --live-stream {0}
     - name: Install Flash Attention
       run: pip install flash-attn==2.5.6 --no-build-isolation
-      shell: micromamba run -n micromamba_pytest_${{ github.sha }} --live-stream {0}
+      shell: micromamba run -n micromamba_pytest_env --live-stream {0}
     - name: Install Pytest
       run: pip install pytest
-      shell: micromamba run -n micromamba_pytest_${{ github.sha }} --live-stream {0}
+      shell: micromamba run -n micromamba_pytest_env --live-stream {0}
     - name: Run Pytest Tests
       run: pytest
-      shell: micromamba run -n micromamba_pytest_${{ github.sha }} --live-stream {0}
+      shell: micromamba run -n micromamba_pytest_env --live-stream {0}
