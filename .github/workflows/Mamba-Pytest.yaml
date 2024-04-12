@@ -20,6 +20,7 @@ jobs:
       with:
         micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
         micromamba-binary-path: ${{ runner.temp }}/bin/micromamba
+        environment-name: mamba_pytest_${{ github.sha }}
         create-args: python=3.11
         post-cleanup: 'all'
     - name: Lint with flake8
