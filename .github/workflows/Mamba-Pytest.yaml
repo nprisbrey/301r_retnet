@@ -4,7 +4,7 @@ run-name: Mamba Env Pytest
 on:
   pull_request:
     [labeled, opened]
-  merge_group:
+  merge_group
   workflow_dispatch
 
 jobs:
