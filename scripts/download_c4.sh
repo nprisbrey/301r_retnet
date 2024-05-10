@@ -1,3 +1,4 @@
+#!/bin/bash
 ###
 # This script downloads the C4 dataset from HuggingFace via the git repository.
 # You will only want to run this script in the directory where you intend to store the dataset.

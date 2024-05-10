@@ -1,3 +1,4 @@
+#!/bin/bash
 # Execute script with the names of the splits to tokenize, separated by spaces
 # Split names: train, validation, test
 
