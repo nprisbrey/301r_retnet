@@ -1,0 +1,43 @@
+name: Mamba Env Pytest
+run-name: Mamba Env Pytest
+
+on:
+  pull_request:
+    types: [labeled, opened]
+  merge_group:
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: [self-hosted, linux]
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: mamba-org/setup-micromamba@v1
+      with:
+        micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
+#        micromamba-binary-path: /usr/local/bin/micromamba
+        environment-name: micromamba_pytest_env
+        create-args: python=3.11
+        post-cleanup: 'all'
+#    - name: Lint with flake8
+#      run: |
+#        mamba install flake8
+#        # stop the build if there are Python syntax errors or undefined names
+#        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+#        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+#        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Install CUDA
+      run: micromamba run -n micromamba_pytest_env $MAMBA_EXE install cuda -c nvidia -y
+    - name: Install Ninja
+      run: micromamba run -n micromamba_pytest_env $MAMBA_EXE install ninja -y
+    - name: Install Python Requirements
+      run: micromamba run -n micromamba_pytest_env pip install -r requirements.txt
+    - name: Install Flash Attention
+      run: micromamba run -n micromamba_pytest_env pip install flash-attn==2.5.6 --no-build-isolation
+    - name: Install Pytest
+      run: micromamba run -n micromamba_pytest_env pip install pytest
+    - name: Run Pytest Tests
+      run: micromamba run -n micromamba_pytest_env pytest
